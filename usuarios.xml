@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<usuarios>
+    <usuario>
+        <idUsuario>1</idUsuario>
+        <nombre>Renan</nombre>
+        <edad>19</edad>
+        <peso>100.0</peso>
+        <altura>150.0</altura>
+    </usuario>
+</usuarios>
