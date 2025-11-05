@@ -4,10 +4,12 @@
  */
 package interfazGUI;
 
+import gestores.GestorBD;
 import gestores.GestorEjercicios;
 import gestores.GestorFicheros;
 import gestores.GestorRutinas;
 import gestores.GestorUsuarios;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,17 +21,19 @@ public class ventanaExportar extends javax.swing.JFrame {
     GestorRutinas gr;
     GestorEjercicios ge;
     GestorFicheros gf;
+    GestorBD gbd;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ventanaExportar.class.getName());
 
     /**
      * Creates new form ventanaImportar
      */
-    public ventanaExportar(GestorUsuarios gu, GestorRutinas gr, GestorEjercicios ge,GestorFicheros gf) {
+    public ventanaExportar(GestorUsuarios gu, GestorRutinas gr, GestorEjercicios ge,GestorFicheros gf, GestorBD gbd) {
         this.gu = gu;
         this.gr = gr;
         this.ge = ge;
         this.gf = gf;
+        this.gbd = gbd;
         initComponents();
     }
 
@@ -49,6 +53,7 @@ public class ventanaExportar extends javax.swing.JFrame {
         botonBinario = new javax.swing.JButton();
         botonDom = new javax.swing.JButton();
         botonJAXB = new javax.swing.JButton();
+        botonSQLite = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +95,13 @@ public class ventanaExportar extends javax.swing.JFrame {
             }
         });
 
+        botonSQLite.setText("SQLite");
+        botonSQLite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSQLiteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -108,7 +120,8 @@ public class ventanaExportar extends javax.swing.JFrame {
                             .addComponent(botonBinario, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonDom, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonJAXB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(botonJAXB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -124,7 +137,9 @@ public class ventanaExportar extends javax.swing.JFrame {
                 .addComponent(botonDom, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonJAXB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(botonVolver)
                 .addContainerGap())
         );
@@ -203,7 +218,17 @@ public class ventanaExportar extends javax.swing.JFrame {
 
     private void botonJAXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJAXBActionPerformed
         // TODO add your handling code here:
+        GestorFicheros gf = new GestorFicheros();
+        gf.exportarJAXB(gu.getUsuarios(), gr.getRutinas(), ge.getEjercicios());
     }//GEN-LAST:event_botonJAXBActionPerformed
+
+    private void botonSQLiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSQLiteActionPerformed
+        // TODO add your handling code here:
+        if (gbd == null) {
+            gbd = new GestorBD();
+        }
+        gbd.exportarTodo(gu, gr, ge);
+    }//GEN-LAST:event_botonSQLiteActionPerformed
 
     private void volver() {
         this.dispose(); // cierra solo esta ventana
@@ -213,6 +238,7 @@ public class ventanaExportar extends javax.swing.JFrame {
     private javax.swing.JButton botonBinario;
     private javax.swing.JButton botonDom;
     private javax.swing.JButton botonJAXB;
+    private javax.swing.JButton botonSQLite;
     private javax.swing.JButton botonTexto;
     private javax.swing.JButton botonVolver;
     private javax.swing.JLabel etiExportar;

@@ -4,6 +4,7 @@
  */
 package interfazGUI;
 
+import gestores.GestorBD;
 import gestores.GestorEjercicios;
 import gestores.GestorFicheros;
 import gestores.GestorRutinas;
@@ -19,6 +20,7 @@ public class ventanaPrincipal extends javax.swing.JFrame {
     public GestorRutinas gestorRutinas;
     public GestorEjercicios gestorEjercicios;
     public GestorFicheros gestorFicheros;
+    public GestorBD gestorBd;
 
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ventanaPrincipal.class.getName());
@@ -213,12 +215,12 @@ public class ventanaPrincipal extends javax.swing.JFrame {
 
     private void botonImportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonImportarActionPerformed
         // TODO add your handling code here:
-        new ventanaImportar(gestorUsuarios, gestorRutinas, gestorEjercicios, gestorFicheros).setVisible(true);
+        new ventanaImportar(gestorUsuarios, gestorRutinas, gestorEjercicios, gestorFicheros, gestorBd).setVisible(true);
     }//GEN-LAST:event_botonImportarActionPerformed
 
     private void botonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExportarActionPerformed
         // TODO add your handling code here:
-        new ventanaExportar(gestorUsuarios, gestorRutinas, gestorEjercicios, gestorFicheros).setVisible(true);
+        new ventanaExportar(gestorUsuarios, gestorRutinas, gestorEjercicios, gestorFicheros, gestorBd).setVisible(true);
     }//GEN-LAST:event_botonExportarActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed

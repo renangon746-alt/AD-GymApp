@@ -9,11 +9,19 @@ import modelo.Ejercicio;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.File;
+import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import modelo.EjercicioWrapper;
+import modelo.GimnasioXML;
+import modelo.RutinaWrapper;
+import modelo.UsuarioWrapper;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 
@@ -177,10 +185,10 @@ public class GestorFicheros {
             oosEjercicios.writeObject(ejercicios);
             oosEjercicios.close();
 
-            System.out.println("✅ Datos exportados correctamente en formato binario.");
+            System.out.println("Datos exportados correctamente en formato binario.");
 
         } catch (IOException e) {
-            System.err.println("❌ Error al exportar en binario: " + e.getMessage());
+            System.err.println("Error al exportar en binario: " + e.getMessage());
         }
     }
 
@@ -468,4 +476,45 @@ public class GestorFicheros {
 
         return usuarios;
     }
+    
+// -------------------- EXPORTAR TODO XML (JAXB) --------------------
+    public void exportarJAXB(List<Usuario> usuarios, List<Rutina> rutinas, List<Ejercicio> ejercicios) {
+    try {
+        JAXBContext contextUsuarios = JAXBContext.newInstance(UsuarioWrapper.class);
+        Marshaller mUsuarios = contextUsuarios.createMarshaller();
+        mUsuarios.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        mUsuarios.marshal(new UsuarioWrapper(usuarios), new File("usuarios.xml"));
+
+        JAXBContext contextRutinas = JAXBContext.newInstance(RutinaWrapper.class);
+        Marshaller mRutinas = contextRutinas.createMarshaller();
+        mRutinas.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        mRutinas.marshal(new RutinaWrapper(rutinas), new File("rutinas.xml"));
+
+        JAXBContext contextEjercicios = JAXBContext.newInstance(EjercicioWrapper.class);
+        Marshaller mEjercicios = contextEjercicios.createMarshaller();
+        mEjercicios.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        mEjercicios.marshal(new EjercicioWrapper(ejercicios), new File("ejercicios.xml"));
+
+        System.out.println("Exportado correctamente a JAXB");
+
+    } catch (Exception e) {
+        System.err.println("Error exportando JAXB");
+        e.printStackTrace();
+    }
+}
+
+
+// -------------------- IMPORTAR TODO XML (JAXB) --------------------
+    public GimnasioXML importarJAXB(String ruta) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(GimnasioXML.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            return (GimnasioXML) unmarshaller.unmarshal(new File(ruta));
+        } catch (Exception e) {
+            System.err.println("❌ Error importando JAXB");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

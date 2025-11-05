@@ -2,7 +2,9 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 public class Rutina implements Serializable {
     private static int contadorId = 1;
     private int idRutina;

@@ -63,6 +63,7 @@
                               <Component id="botonTexto" min="-2" pref="200" max="-2" attributes="0"/>
                               <Component id="botonDom" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               <Component id="botonJAXB" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="botonSQLite" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -83,7 +84,9 @@
                   <Component id="botonDom" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="botonJAXB" min="-2" pref="40" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="botonSQLite" min="-2" pref="40" max="-2" attributes="0"/>
+                  <EmptySpace pref="37" max="32767" attributes="0"/>
                   <Component id="botonVolver" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -137,6 +140,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonJAXBActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="botonSQLite">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="SQLite"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonSQLiteActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

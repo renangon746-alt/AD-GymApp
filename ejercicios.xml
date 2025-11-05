@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<ejercicios/>
+<ejercicios>
+    <ejercicio>
+        <nombreEjercicio>Remo</nombreEjercicio>
+        <grupoMuscular>Espalda</grupoMuscular>
+        <descripcion>remo bajo</descripcion>
+        <idRutina>2</idRutina>
+    </ejercicio>
+</ejercicios>

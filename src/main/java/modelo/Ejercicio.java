@@ -5,11 +5,13 @@
 package modelo;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Alumno
  */
+@XmlRootElement
 public class Ejercicio implements Serializable {
     private static int contadorId = 1;
     private int idEjercicio;

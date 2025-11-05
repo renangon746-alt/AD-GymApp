@@ -4,6 +4,7 @@
  */
 package interfazGUI;
 
+import gestores.GestorBD;
 import gestores.GestorEjercicios;
 import gestores.GestorFicheros;
 import gestores.GestorRutinas;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import modelo.GimnasioXML;
 import modelo.Usuario;
 
 /**
@@ -23,17 +25,19 @@ public class ventanaImportar extends javax.swing.JFrame {
     GestorRutinas gr;
     GestorEjercicios ge;
     GestorFicheros gf;
+    GestorBD gbd;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ventanaImportar.class.getName());
 
     /**
      * Creates new form ventanaImportar
      */
-    public ventanaImportar(GestorUsuarios gu, GestorRutinas gr, GestorEjercicios ge, GestorFicheros gf) {
+    public ventanaImportar(GestorUsuarios gu, GestorRutinas gr, GestorEjercicios ge, GestorFicheros gf, GestorBD gbd) {
         this.gu = gu;
         this.gr = gr;
         this.ge = ge;
         this.gf = gf;
+        this.gbd = gbd;
         initComponents();
     }
 
@@ -47,22 +51,16 @@ public class ventanaImportar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        botonVolver = new javax.swing.JButton();
         botonTexto = new javax.swing.JButton();
         etiImportar = new javax.swing.JLabel();
         botonBinario = new javax.swing.JButton();
         botonDom = new javax.swing.JButton();
         botonSax = new javax.swing.JButton();
         botonJAXB = new javax.swing.JButton();
+        botonSQLite = new javax.swing.JButton();
+        botonVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        botonVolver.setText("Volver");
-        botonVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVolverActionPerformed(evt);
-            }
-        });
 
         botonTexto.setText("Texto");
         botonTexto.addActionListener(new java.awt.event.ActionListener() {
@@ -102,15 +100,19 @@ public class ventanaImportar extends javax.swing.JFrame {
             }
         });
 
+        botonSQLite.setText("SQLite");
+        botonSQLite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSQLiteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(botonVolver))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(etiImportar))
@@ -121,7 +123,8 @@ public class ventanaImportar extends javax.swing.JFrame {
                             .addComponent(botonTexto, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonDom, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botonSax, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonJAXB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(botonJAXB, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,10 +142,17 @@ public class ventanaImportar extends javax.swing.JFrame {
                 .addComponent(botonSax, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonJAXB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(botonVolver)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonSQLite, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
+
+        botonVolver.setText("Volver");
+        botonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,12 +162,18 @@ public class ventanaImportar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(botonVolver)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonVolver)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -241,7 +257,33 @@ public class ventanaImportar extends javax.swing.JFrame {
 
     private void botonJAXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonJAXBActionPerformed
         // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+
+            GimnasioXML datos = gf.importarJAXB(chooser.getSelectedFile().getAbsolutePath());
+
+            if (datos != null) {
+                gu.getUsuarios().clear();
+                gu.getUsuarios().addAll(datos.getUsuarios());
+
+                gr.getRutinas().clear();
+                gr.getRutinas().addAll(datos.getRutinas());
+
+                ge.getEjercicios().clear();
+                ge.getEjercicios().addAll(datos.getEjercicios());
+
+                JOptionPane.showMessageDialog(this, "Importación JAXB realizada correctamente");
+            }
+        }
     }//GEN-LAST:event_botonJAXBActionPerformed
+
+    private void botonSQLiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSQLiteActionPerformed
+        // TODO add your handling code here:
+        if (gbd == null) {
+            gbd = new GestorBD();
+        }
+        gbd.importarTodo(gu, gr, ge);
+    }//GEN-LAST:event_botonSQLiteActionPerformed
 
     private void volver() {
         this.dispose(); // cierra solo esta ventana
@@ -251,6 +293,7 @@ public class ventanaImportar extends javax.swing.JFrame {
     private javax.swing.JButton botonBinario;
     private javax.swing.JButton botonDom;
     private javax.swing.JButton botonJAXB;
+    private javax.swing.JButton botonSQLite;
     private javax.swing.JButton botonSax;
     private javax.swing.JButton botonTexto;
     private javax.swing.JButton botonVolver;

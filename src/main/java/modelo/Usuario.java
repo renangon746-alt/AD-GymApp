@@ -7,11 +7,13 @@ package modelo;
 import excepciones.MyException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Alumno
  */
+@XmlRootElement
 public class Usuario implements Serializable {
     public static int contadorId = 1;
     private int idUsuario;

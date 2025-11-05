@@ -26,12 +26,12 @@ public ArrayList<Usuario> getListaUsuarios() {
 
         @Override
         public void startDocument() throws SAXException {
-            System.out.println("📥 Inicio de la lectura del XML (SAX)");
+            System.out.println(" Inicio de la lectura del XML (SAX)");
         }
 
         @Override
         public void endDocument() throws SAXException {
-            System.out.println("📄 Fin del documento XML");
+            System.out.println(" Fin del documento XML");
         }
 
         @Override

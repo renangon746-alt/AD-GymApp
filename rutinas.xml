@@ -1,2 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<rutinas/>
+<rutinas>
+    <rutina>
+        <idRutina>1</idRutina>
+        <nombreRutina>Espalda</nombreRutina>
+        <idUsuario>1</idUsuario>
+    </rutina>
+    <rutina>
+        <idRutina>2</idRutina>
+        <nombreRutina>Espalda</nombreRutina>
+        <idUsuario>2</idUsuario>
+    </rutina>
+</rutinas>
